@@ -1,0 +1,121 @@
+<html>
+
+<head>
+  <title>
+    GUESS IT
+  </title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body style="background-image: url('https://images.fineartamerica.com/images/artworkimages/mediumlarge/1/sunset-over-mountains-night-dark-blue-and-pink-sky-and-silhouette-of-mountain-anastasiia-shliago.jpg');background-position: center;background-size: cover; min-height: 100vh;color: white">
+  <center>
+    <br><br>
+    <h1>
+      GUESS IT
+    </h1>
+    <br><br>
+
+    <h4>PLAYER 1 :</h4>
+    <input id="Player1" style="width: 60%;" type="text" placeholder="player1"> <br><br>
+    <h4>PLAYER 2 :</h4>
+    <input id="Player2" style="width: 60%;" type="text" placeholder="player2"><br><br>
+
+    <button type="button" onclick="login()">Login</button>
+    <br><br>
+    <h3 id="playerQ"></h3>
+
+    <label>
+      will give the question
+    </label>
+    <h3 id="playerA"></h3> 
+    <label>
+      will answer the question
+    </label>
+
+    <br><br><br>
+    <div id="output">
+    </div>
+    <br><br>
+    <h3 id="player1scorename"> </h3><span id="playeronescore"> </span></h3>
+    <h3 id="player2scorename"> </h3><span id="playertwoscore"> </span>
+    <h4>NUMBER 1 :</h4>
+    <input id="one" style="width: 60%;" type="text" placeholder="Number">
+    <br><br>
+    <h4>NUMBER 2 :</h4>
+    <input id="two" style="width: 60%;" type="text" placeholder="Number">
+    <br><br><br>
+
+    <button type="button" onclick="send()">Send</button>
+
+  </center>
+  <script>
+   
+    function login() {
+      playerone = document.getElementById("Player1").value;
+      playertwo = document.getElementById("Player2").value;
+      localStorage.setItem("PlayerOneName", playerone);
+      localStorage.setItem("PlayerTwoName", playertwo);
+      localStorage.setItem("PlayerQ", playerone);
+      // playerone = localStorage.getItem("PlayerOneName");
+      // playertwo = localStorage.getItem("PlayerTwoName");
+      document.getElementById("playerQ").innerHTML = playerone;
+   // askQ   = playerone;
+      document.getElementById("playerA").innerHTML = playertwo;
+      playerOneName = localStorage.getItem("PlayerOneName");
+      playerTwoName = localStorage.getItem("PlayerTwoName");
+      playerOneScore = 0;
+      playerTwoScore = 0;
+    }
+
+    function send() {
+      getNumberOne = document.getElementById("one").value;
+      getNumberTwo = document.getElementById("two").value;
+      numberOne = getNumberOne;
+      numberTwo = getNumberTwo;
+      console.log(numberOne + " and " + numberTwo);
+      answer = parseInt(numberOne) * parseInt(numberTwo);
+      console.log(answer + "is the answer");
+      number = numberOne + " x " + numberTwo;
+      console.log(number);
+      q = "<h2>Question : " + number + "</h2><br>";
+      answer = "<h2>Answer : </h2><input id='ans' type='text' placeholder='Answer'><br><br><button type='button' onclick ='check();' id='check'>Check</button>";
+      set = q + answer;
+      document.getElementById("output").innerHTML = set;
+      document.getElementById("ans").value = "";
+    }
+
+    function check() {
+      getNumberOne = document.getElementById("one").value;
+      getNumberTwo = document.getElementById("two").value;
+    askQ = localStorage.getItem("PlayerQ");
+        playerOneName = localStorage.getItem("PlayerOneName");
+      playerTwoName = localStorage.getItem("PlayerTwoName");
+     console.log("Q :"+askQ);
+      console.log(playerOneName);
+      console.log(playerTwoName);
+      
+      answer = parseInt(numberOne) * parseInt(numberTwo);
+      if (answer == parseInt(document.getElementById("ans").value)) { console.log(askQ == playerOneName);
+        if (askQ == playerOneName) {
+          playerOneScore = playerOneScore + 1;
+          document.getElementById("playerQ").innerHTML = playerTwoName;
+         
+          localStorage.setItem("PlayerQ", playerTwoName);
+          document.getElementById("playerA").innerHTML = playerOneName;
+        } else {
+          playerTwoScore = playerTwoScore + 1;
+         //askQ= playerTwoName;
+          localStorage.setItem("PlayerQ", playerOneName);
+          document.getElementById("playerA").innerHTML = playerTwoName;
+          document.getElementById("playerQ").innerHTML = playerOneName;
+        }
+      }
+      document.getElementById("player1scorename").innerHTML = playerOneName;
+      document.getElementById("player2scorename").innerHTML = playerTwoName;
+      document.getElementById("playeronescore").innerHTML = playerOneScore;
+      document.getElementById("playertwoscore").innerHTML = playerTwoScore;
+    }
+  </script>
+</body>
+
+</html>
